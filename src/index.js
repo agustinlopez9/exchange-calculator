@@ -1,7 +1,7 @@
 const calcular = document.querySelector("#button");
 const monto = document.querySelector("#monto");
 const comisionOntop = 1.54;
-const comisionCrypto = 0.8;
+const comisionCrypto = 2;
 
 async function getDolarCCL() {
   try {
@@ -12,7 +12,7 @@ async function getDolarCCL() {
     var data = await response.json();
     var dolarCCL = parseFloat(data.compra.replace(",", "."));
     let montoACambiar = parseFloat(monto.value);
-    var totalOntop = (montoACambiar - comisionOntop) * dolarCCL * 0.925;
+    var totalOntop = (montoACambiar - comisionOntop) * dolarCCL * 0.93;
     if (!montoACambiar || Number.isNaN(montoACambiar) || montoACambiar < 20) {
       document.querySelector("#total-ontop").innerText = `
       El monto minimo para transferir desde Ontop es $20`;
