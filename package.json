@@ -6,7 +6,7 @@
   "main": "script.js",
   "scripts": {
     "tailwind": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch",
-    "dev": "rm -rf ./development && rm -rf ./.cache && parcel public/index.html --out-dir development -p 3000",
+    "dev": "parcel public/index.html --out-dir development -p 3000",
     "build": "parcel build public/index.html --out-dir build --public-url ./",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -d build"

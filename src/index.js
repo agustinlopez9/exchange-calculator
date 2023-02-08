@@ -1,5 +1,6 @@
 const calcular = document.querySelector("#button")
 const monto = document.querySelector("#monto")
+const comisionExchange = document.querySelector("#comision")
 const comisionOntop = 1.54
 const comisionCrypto = 2
 
@@ -20,7 +21,7 @@ async function getDolarCCL () {
     }
     document.querySelector("#total-ontop").innerText = `
               Dolar CCL = $${dolarCCL}
-              TOTAL = $${totalOntop.toFixed(2)}
+              TOTAL = $${totalOntop.toFixed(2)} ARS
               Estarias cambiando a = $${(
         totalOntop / montoACambiar
       ).toFixed(2)}
@@ -48,8 +49,8 @@ async function getDolarCrypto () {
       return null
     }
     document.querySelector("#total-lemon").innerText = `
-              Dolar Crypto = $${data.totalBid.toFixed(2)}
-              TOTAL = $${totalLemon.toFixed(2)}
+              Dolar Crypto (Final) = $${data.totalBid.toFixed(2)}
+              TOTAL = $${totalLemon.toFixed(2)} ARS
               Estarias cambiando a = $${(
         totalLemon / montoACambiar
       ).toFixed(2)}
@@ -65,8 +66,10 @@ async function getDolarBlue () {
     const dolares = await data.json()
     const filteredDolar = dolares.find((e) => e.casa.nombre === 'Dolar Blue')?.casa.compra
     const dolarBlue = parseFloat(filteredDolar.replace(",", ".")).toFixed(2)
-    let montoACambiar = parseFloat(monto.value)
-    console.log(Number.isNaN(montoACambiar))
+    const montoACambiar = parseFloat(monto.value)
+    const montoMenosComision = montoACambiar - (montoACambiar * comisionExchange.value / 100)
+    const totalExchange = (dolarBlue * montoMenosComision).toFixed(2)
+
     if (!montoACambiar || Number.isNaN(montoACambiar) || montoACambiar < 1) {
       document.querySelector("#total-blue").innerText = `
       Monto invalido
@@ -74,17 +77,24 @@ async function getDolarBlue () {
       return null
     }
     document.querySelector("#total-blue").innerText = `
+    Monto menos comisión: $${montoMenosComision}
     Dolar Blue = $${dolarBlue}
-    TOTAL = $${(dolarBlue * montoACambiar).toFixed(2)}
-    Estarias cambiando a = $${dolarBlue}
+    TOTAL = $${totalExchange} ARS
+    Estarias cambiando a = $${totalExchange / montoACambiar}
     `
   } catch (error) {
     console.log(error)
   }
 }
+
 calcular.addEventListener("click", function (e) {
   e.preventDefault()
   getDolarCCL()
   getDolarCrypto()
+  getDolarBlue()
+})
+
+comisionExchange.addEventListener("change", function (e) {
+  e.preventDefault()
   getDolarBlue()
 })
