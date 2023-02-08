@@ -62,10 +62,9 @@ async function getDolarCrypto () {
 
 async function getDolarBlue () {
   try {
-    const data = await fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
+    const data = await fetch('https://api.bluelytics.com.ar/v2/latest')
     const dolares = await data.json()
-    const filteredDolar = dolares.find((e) => e.casa.nombre === 'Dolar Blue')?.casa.compra
-    const dolarBlue = parseFloat(filteredDolar.replace(",", ".")).toFixed(2)
+    const dolarBlue = dolares.blue.value_buy
     const montoACambiar = parseFloat(monto.value)
     const montoMenosComision = montoACambiar - (montoACambiar * comisionExchange.value / 100)
     const totalExchange = (dolarBlue * montoMenosComision).toFixed(2)
@@ -78,7 +77,7 @@ async function getDolarBlue () {
     }
     document.querySelector("#total-blue").innerText = `
     Monto menos comisión: $${montoMenosComision}
-    Dolar Blue = $${dolarBlue}
+    Dolar Blue compra = $${dolarBlue}
     TOTAL = $${totalExchange} ARS
     Estarias cambiando a = $${totalExchange / montoACambiar}
     `
