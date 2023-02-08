@@ -13,7 +13,7 @@ async function getDolarCCL () {
     var data = await response.json()
     var dolarCCL = parseFloat(data.compra.replace(",", "."))
     let montoACambiar = parseFloat(monto.value)
-    var totalOntop = (montoACambiar - comisionOntop) * dolarCCL * 0.885
+    var totalOntop = (montoACambiar - comisionOntop) * dolarCCL * 0.89
     if (!montoACambiar || Number.isNaN(montoACambiar) || montoACambiar < 20) {
       document.querySelector("#total-ontop").innerText = `
       El monto minimo para transferir desde Ontop es $20`
