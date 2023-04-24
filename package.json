@@ -1,5 +1,5 @@
 {
-  "homepage": "https://aflp2199.github.io/exchange-calculator",
+  "homepage": "https://agustinlopez9.github.io/exchange-calculator",
   "name": "exchange-calculator",
   "version": "1.0.0",
   "description": "Calculadora de cambio",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AFLP2199/exchange-calculator.git"
+    "url": "git+https://github.com/agustinlopez9/exchange-calculator.git"
   },
   "keywords": [],
   "author": "",
