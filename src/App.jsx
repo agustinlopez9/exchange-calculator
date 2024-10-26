@@ -73,7 +73,7 @@ function App() {
         ) : (
           <>
             <Dolares dolarBlue={valorBlue} />
-            {cambio && <Exchange cambio={cambio} descontarComisiones={descontarComisiones} />}
+            {!!cambio && <Exchange cambio={cambio} descontarComisiones={descontarComisiones} />}
           </>
         )}
       </Flex>
