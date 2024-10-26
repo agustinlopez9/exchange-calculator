@@ -19,7 +19,7 @@ function App() {
   const calcularCambio = async () => {
     setLoading(true)
     try {
-      if (monto > 20) {
+      if (monto > 0) {
         const { ccl, dolarBlue } = await getDolares()
         setValorBlue(dolarBlue)
         setValorCCL(ccl)
@@ -30,7 +30,7 @@ function App() {
           cambioBlue: cambioBlue,
         })
       } else {
-        setError("El monto debe ser mayor a 20")
+        setError("El monto debe ser mayor a 0")
       }
       setLoading(false)
     } catch (error) {
@@ -41,7 +41,6 @@ function App() {
 
   useEffect(() => {
     const refreshDolares = async () => {
-      setLoading(true)
       try {
         const { ccl, dolarBlue } = await getDolares()
         setValorBlue(dolarBlue)
