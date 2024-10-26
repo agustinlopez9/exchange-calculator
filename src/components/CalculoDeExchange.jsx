@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { Button, Paper, Text } from "@mantine/core"
+import { Button, Flex, Paper, Text } from "@mantine/core"
 
 const CalculoDeExchange = ({ cambio, descontarComisiones }) => {
   const { lemon, cambioBlue } = cambio
   return (
-    <>
-      <Paper shadow="sm" radius="lg" p="xl" miw="20rem" mih="320px">
-        <Text c="blue" ta="center">
+    <Flex justify="center" gap="md" wrap="wrap" w="100%" maw="1024px">
+      <Paper align="center" shadow="sm" radius="lg" p="xl" w="100%" miw="300px" maw="504px">
+        <Text c="teal" ta="center">
           Cambio Lemon Cash:
         </Text>
         {lemon && (
@@ -17,7 +17,7 @@ const CalculoDeExchange = ({ cambio, descontarComisiones }) => {
           </>
         )}
       </Paper>
-      <Paper shadow="sm" radius="lg" p="xl" miw="20rem" mih="320px">
+      <Paper align="center" shadow="sm" radius="lg" p="xl" w="100%" miw="300px" maw="504px">
         <Text c="blue" ta="center">
           Cambio Blue:
         </Text>
@@ -29,7 +29,7 @@ const CalculoDeExchange = ({ cambio, descontarComisiones }) => {
           </>
         )}
       </Paper>
-    </>
+    </Flex>
   )
 }
 export default CalculoDeExchange

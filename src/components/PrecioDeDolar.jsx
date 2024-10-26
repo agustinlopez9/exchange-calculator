@@ -1,39 +1,24 @@
-import { Paper, Text } from "@mantine/core"
+import { Flex, Paper, Text } from "@mantine/core"
 
-const PrecioDeDolar = ({ dolarBlue, dolarCCL }) => {
-  const dolares = [
-    {
-      title: "Dolar Blue",
-      compra: dolarBlue.compra,
-      venta: dolarBlue.venta,
-      theme: "blue",
-    },
-    {
-      title: "Dolar CCL",
-      compra: dolarCCL.compra,
-      venta: dolarCCL.venta,
-      theme: "teal",
-    },
-  ]
-
+const PrecioDeDolar = ({ dolarBlue }) => {
   return (
-    <Paper shadow="sm" radius="lg" p="xl" miw="20rem" mih="320px">
-      {!!dolarBlue && !!dolarCCL && dolares.map((dolar) => (
-        <>
-          <Text c={dolar.theme} ta="center">
-            {dolar.title}:
-          </Text>
-          <>
-            <p>
-              <b>Compra:</b> ${parseFloat(dolar.compra.toFixed(2)).toLocaleString()}
-            </p>
-            <p>
-              <b>Venta:</b> ${parseFloat(dolar.venta.toFixed(2)).toLocaleString()}
-            </p>
-          </>
-        </>
-      ))}
-    </Paper>
+    dolarBlue && (
+      <Paper shadow="sm" radius="lg" p="xl" w="100%" maw="1024px">
+        <Text c="blue" ta="center">
+          Dolar Blue:
+        </Text>
+        <Flex direction="row" justify="space-around" mx="auto" gap="md" maw="600px">
+          <p>
+            <b>Compra:</b>
+            <br />${parseFloat(dolarBlue.compra.toFixed(2)).toLocaleString()}
+          </p>
+          <p>
+            <b>Venta:</b>
+            <br />${parseFloat(dolarBlue.venta.toFixed(2)).toLocaleString()}
+          </p>
+        </Flex>
+      </Paper>
+    )
   )
 }
 export default PrecioDeDolar

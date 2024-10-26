@@ -11,7 +11,7 @@ function App() {
   const [valorCCL, setValorCCL] = useState(0)
   const [monto, setMonto] = useState(0)
   const [comision, setComision] = useState(0)
-  const [cambio, setCambio] = useState({})
+  const [cambio, setCambio] = useState(null)
   const [descontarComisiones, setDescontarComisiones] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -63,17 +63,17 @@ function App() {
         setDescontarComisiones={setDescontarComisiones}
       />
       {error && (
-        <Notification onClose={() => setError(null)} maw="1024px" mt="xl" m="auto" color="red" title="Error">
+        <Notification onClose={() => setError(null)} maw="835px" mt="xl" m="auto" color="red" title="Error">
           {error}
         </Notification>
       )}
-      <Flex gap="md" direction="row" p="xs" my="xl" justify="center" align="center" wrap="wrap">
+      <Flex gap="md" direction="column" p="xs" my="xl" mx="auto" justify="center" align="center" wrap="wrap">
         {loading ? (
           <Loader size={30} />
         ) : (
           <>
-            <Dolares dolarBlue={valorBlue} dolarCCL={valorCCL} />
-            <Exchange cambio={cambio} descontarComisiones={descontarComisiones} />
+            <Dolares dolarBlue={valorBlue} />
+            {cambio && <Exchange cambio={cambio} descontarComisiones={descontarComisiones} />}
           </>
         )}
       </Flex>
