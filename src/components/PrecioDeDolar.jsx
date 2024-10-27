@@ -3,7 +3,7 @@ import { comisiones } from "../services/conversion"
 
 const PrecioDeDolar = ({ dolarBlue }) => {
   return (
-    dolarBlue && (
+    !!dolarBlue && (
       <Paper shadow="sm" radius="lg" p="xl" w="100%" maw="1024px">
         <Flex direction="row" justify="center" gap="lg">
           <Flex direction="column" justify="center" w="100%">

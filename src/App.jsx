@@ -1,28 +1,26 @@
 import { useState, useEffect } from "react"
 import { Flex, Loader, MantineProvider, Notification } from "@mantine/core"
 import "@mantine/core/styles.css"
-import { fetchDolarBlue, fetchDolarCCL, getDolares } from "./services/fetchDolares"
+import { fetchDolarBlue } from "./services/fetchDolares"
 import { calcularLemon, calcularBlue } from "./services/conversion"
-import { Monto, Dolares, Exchange } from './components/index'
+import { Monto, Dolares, Exchange } from "./components/index"
 import "./App.css"
 
 function App() {
   const [valorBlue, setValorBlue] = useState(0)
-  const [valorCCL, setValorCCL] = useState(0)
   const [monto, setMonto] = useState(0)
   const [comision, setComision] = useState(0)
   const [cambio, setCambio] = useState(null)
   const [descontarComisiones, setDescontarComisiones] = useState(false)
   const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const calcularCambio = async () => {
     setLoading(true)
     try {
       if (monto > 0) {
-        const { ccl, dolarBlue } = await getDolares()
+        const dolarBlue = await fetchDolarBlue()
         setValorBlue(dolarBlue)
-        setValorCCL(ccl)
         const lemonCash = await calcularLemon(monto, descontarComisiones)
         const cambioBlue = await calcularBlue(monto, comision, dolarBlue.compra, descontarComisiones)
         setCambio({
@@ -40,18 +38,17 @@ function App() {
   }
 
   useEffect(() => {
-    const refreshDolares = async () => {
+    const refreshDolar = async () => {
       try {
-        const { ccl, dolarBlue } = await getDolares()
+        const dolarBlue = await fetchDolarBlue()
         setValorBlue(dolarBlue)
-        setValorCCL(ccl)
         setLoading(false)
       } catch (error) {
         setError(error.message)
         setLoading(false)
       }
     }
-    refreshDolares()
+    refreshDolar()
   }, [])
 
   return (
