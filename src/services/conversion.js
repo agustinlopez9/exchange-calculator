@@ -48,8 +48,9 @@ export const calcularExchanges = async (monto, descontarComisiones) => {
 }
 
 export const calcularBlue = async (monto, comision, dolarBlue, descontarComisiones) => {
-  const montoMenosComision =
-    (descontarComisiones ? monto - comisiones.trc20 - monto * (comisiones.ontop / 100) : monto) - monto * (comision / 100)
+  const montoMenosComision = descontarComisiones
+    ? monto - comisiones.trc20 - monto * (comisiones.ontop / 100)
+    : monto - monto * (comision / 100)
   return {
     compra: parseFloat(dolarBlue.toFixed(2)).toLocaleString(),
     totalEnDolares: parseFloat(montoMenosComision.toFixed(2)).toLocaleString(),
