@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Flex, Loader, MantineProvider, Notification } from "@mantine/core"
 import "@mantine/core/styles.css"
 import { fetchDolarBlue } from "./services/fetchDolares"
-import { calcularLemon, calcularBlue } from "./services/conversion"
+import { calcularBlue, calcularExchanges } from "./services/conversion"
 import { Monto, Dolares, Exchange } from "./components/index"
 import "./App.css"
 
@@ -21,11 +21,11 @@ function App() {
       if (monto > 0) {
         const dolarBlue = await fetchDolarBlue()
         setValorBlue(dolarBlue)
-        const lemonCash = await calcularLemon(monto, descontarComisiones)
         const cambioBlue = await calcularBlue(monto, comision, dolarBlue.compra, descontarComisiones)
+        const cambioExchanges = await calcularExchanges(monto, descontarComisiones)
         setCambio({
-          lemon: lemonCash,
-          cambioBlue: cambioBlue,
+          cambioBlue,
+          cambioExchanges
         })
       } else {
         setError("El monto debe ser mayor a 0")

@@ -15,7 +15,7 @@ const Monto = ({ setMonto, setComision, setDescontarComisiones, calcularCambio }
                 type="number"
                 label={<p style={{ marginBottom: "14px", color: "#fff" }}>Monto:</p>}
                 placeholder="Ingrese un monto"
-                onChange={(event) => setMonto(event.currentTarget.value)}
+                onChange={(event) => setMonto(parseInt(event.currentTarget.value, 10))}
                 w="275px"
               />
               <TextInput
